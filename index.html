@@ -249,30 +249,17 @@
         R$ 47<span style="font-size: 1.2rem; font-weight: 500; color: var(--text-secondary);"> à vista</span>
       </div>
 
-      <button onclick="openCheckoutModal()" class="btn-primary">
+      <!-- IMPORTANTE: Substitua 'https://pay.kiwify.com.br/SEU_CODIGO_DE_CHECKOUT' pelo link do seu checkout gerado na Kiwify -->
+      <a href="https://pay.kiwify.com.br/SEU_CODIGO_DE_CHECKOUT" class="btn-primary">
         <span>Garantir Meu Acesso Agora</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </button>
+      </a>
 
       <div style="margin-top: 24px; color: var(--text-muted); font-size: 0.9rem;">
         *Pagamento único, sem mensalidades.
       </div>
     </div>
   </section>
-
-  <!-- Checkout Modal Simulado -->
-  <div id="checkout-modal" style="display: none; position: fixed; inset: 0; background: rgba(7, 9, 19, 0.95); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-    <div class="glass-card" style="max-width: 500px; width: 90%; text-align: center; border-color: var(--primary);">
-      <h3 style="margin-bottom: 12px; font-size: 1.6rem;" class="gradient-text">Acesso Liberado!</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 24px;">Como este é um projeto demonstrativo, seu acesso ao material completo do infoproduto já está integrado no seu painel!</p>
-      
-      <!-- Guia Button -->
-      <a href="guia_site_ia.html" class="btn-primary" style="margin-bottom: 12px;">Acessar o Guia Interativo</a>
-      <a href="prompts_vault.md" class="btn-secondary" style="width: 100%; display: block; margin-bottom: 20px;">Ver Biblioteca de Prompts (.md)</a>
-      
-      <button onclick="closeCheckoutModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; text-decoration: underline;">Voltar para a página</button>
-    </div>
-  </div>
 
   <footer>
     <div class="container">
@@ -299,15 +286,6 @@
         }
       });
     });
-
-    // Simulated Checkout Modal
-    function openCheckoutModal() {
-      document.getElementById('checkout-modal').style.display = 'flex';
-    }
-
-    function closeCheckoutModal() {
-      document.getElementById('checkout-modal').style.display = 'none';
-    }
 
     // AI Site Builder Simulation Script
     function startSimulation() {
