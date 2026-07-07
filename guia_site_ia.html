@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Interativo: Site Expresso com IA</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg-dark: #0A0E1A;
+      --bg-surface: #131A2D;
+      --bg-surface-hover: #1C263F;
+      --primary: #00F2FE;
+      --secondary: #4FACFE;
+      --accent: #10B981;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --border-color: rgba(255,255,255,0.08);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      background-color: #070A14;
+      border-right: 1px solid var(--border-color);
+      padding: 40px 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      display: block;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-bottom: 8px;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+      background-color: var(--bg-surface);
+    }
+
+    .nav-links a.active {
+      border-left: 3px solid var(--primary);
+    }
+
+    /* Main Content Area */
+    main {
+      padding: 60px 80px;
+      max-width: 850px;
+      overflow-y: auto;
+    }
+
+    .section-content {
+      display: none;
+    }
+
+    .section-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    /* Code blocks & Callouts */
+    .code-box {
+      background-color: #03050A;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin: 24px 0;
+      position: relative;
+    }
+
+    .code-box pre {
+      color: #E2E8F0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--bg-surface-hover);
+      border-color: var(--primary);
+    }
+
+    .alert-box {
+      background: rgba(0, 242, 254, 0.05);
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+
+    .alert-box.success {
+      background: rgba(16, 185, 129, 0.05);
+      border-left-color: var(--accent);
+    }
+
+    .alert-box h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .alert-box p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #0A0E1A;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    ol, ul {
+      margin-left: 24px;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        height: auto;
+        position: relative;
+        padding: 24px;
+      }
+      main {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <aside>
+      <a href="#" class="brand">SITE<span>EXPRESSO</span></a>
+      <ul class="nav-links">
+        <li><a href="#" class="active" onclick="showSection('intro')">Introdução</a></li>
+        <li><a href="#" onclick="showSection('cases')">Casos & Sistemas</a></li>
+        <li><a href="#" onclick="showSection('step1')">1. O Prompt Perfeito</a></li>
+        <li><a href="#" onclick="showSection('step2')">2. Customizando Sem Código</a></li>
+        <li><a href="#" onclick="showSection('step3')">3. Hospedagem Grátis</a></li>
+        <li><a href="#" onclick="showSection('step4')">4. Conectando Domínio</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Introdução -->
+      <div id="intro" class="section-content active">
+        <h1>Manual Prático: Site Expresso com IA</h1>
+        <p>Bem-vindo ao guia oficial do método! Aqui você aprenderá como usar a inteligência artificial para criar, estilizar e colocar no ar uma página de alta qualidade profissional em menos de uma hora.</p>
+        
+        <div class="alert-box">
+          <h4>💡 A Filosofia do Método</h4>
+          <p>Você não precisa aprender a escrever código de programação do zero. A IA é sua programadora pessoal. O seu papel é atuar como o arquiteto e diretor criativo, revisando e editando os resultados.</p>
+        </div>
+
+        <h2>O Que Você Vai Criar</h2>
+        <p>Ao final deste manual, você terá:</p>
+        <ul>
+          <li>Um site completo estruturado em HTML5 semântico (limpo, rápido e amigável para o Google).</li>
+          <li>Uma folha de estilos CSS3 moderna com design responsivo (que funciona perfeitamente em computadores e celulares).</li>
+          <li>Um site publicado em uma CDN global de forma 100% gratuita.</li>
+        </ul>
+        <p>Selecione o primeiro passo no menu lateral para começar a criar!</p>
+      </div>
+
+      <!-- Casos & Sistemas -->
+      <div id="cases" class="section-content">
+        <h1>Casos Reais & Sistemas com IA</h1>
+        <p>A prova do poder da Inteligência Artificial está nos resultados práticos de quem já aplica o método.</p>
+
+        <div class="alert-box success">
+          <h4>🔗 Exemplo Real de Aluno</h4>
+          <p>O site de negócios <strong><a href="https://www.levemaisfibra.com.br/b2b/" target="_blank" style="color: var(--primary);">Leve Mais Fibra B2B</a></strong> é um exemplo real de página de vendas profissional desenvolvida do absoluto zero e publicada utilizando exatamente o método Site Expresso com IA. Toda a estrutura de cópia, design e colocação no ar foi feita diretamente pelo próprio cliente sem saber programar.</p>
+        </div>
+
+        <h2>Muito Além de Sites Simples: Criando Sistemas</h2>
+        <p>Uma dúvida muito comum é se a Inteligência Artificial é capaz de gerar apenas sites de texto e imagens estáticos. A resposta é <strong>não!</strong> Você pode criar ferramentas muito mais complexas:</p>
+        
+        <ul>
+          <li><strong>Sistemas Internos & Dashboards:</strong> Painéis para controle financeiro, controle de estoque simples ou CRM integrando APIs locais.</li>
+          <li><strong>Calculadoras e Simuladores:</strong> Ferramentas interativas de conversão de leads (como simuladores de investimento, calculadoras de calorias ou cotações de preços em tempo real).</li>
+          <li><strong>Aplicações Web Interativas:</strong> Jogos simples, gerenciadores de tarefas ou aplicativos baseados em inputs do usuário.</li>
+        </ul>
+        
+        <p>No módulo avançado da biblioteca de prompts, fornecemos a base técnica para orientar a IA a criar arquivos de lógica <code>.js</code> complexos de forma visual e modular.</p>
+      </div>
+
+      <!-- Passo 1: O Prompt Perfeito -->
+      <div id="step1" class="section-content">
+        <span class="step-badge">Passo 1</span>
+        <h1>Estruturando com o Prompt Perfeito</h1>
+        <p>A qualidade do seu site depende diretamente de como você descreve a estrutura para a Inteligência Artificial. Para isso, usamos a estrutura de <strong>Prompt Mega-Estruturador</strong>.</p>
+        
+        <p>Abra o Gemini, ChatGPT ou Claude e envie o prompt a seguir para criar a base do seu site:</p>
+
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre id="prompt-content">Você é um desenvolvedor front-end sênior especialista em web design minimalista e moderno.
+Quero que crie o HTML5 de uma landing page profissional para o nicho de [DIGITE SEU NEGÓCIO AQUI].
+Requisitos obrigatórios:
+1. Use HTML5 semântico (header, main, section, footer).
+2. O layout deve conter: Hero Section persuasiva, Seção de Serviços/Diferenciais, Depoimentos de clientes e um FAQ com estilo sanfona (accordion) interativo.
+3. Não use bibliotecas externas de CSS ou frameworks (como Tailwind ou Bootstrap).
+4. Forneça o arquivo index.html contendo a estrutura limpa e um arquivo index.css separado para estilos com design premium (modo escuro, gradientes sutis, fontes modernas e cantos arredondados).
+5. O site deve ser totalmente responsivo (mobile-friendly).</pre>
+        </div>
+
+        <div class="alert-box success">
+          <h4>📌 Dica de Ouro</h4>
+          <p>Substitua o trecho <code>[DIGITE SEU NEGÓCIO AQUI]</code> pela sua profissão ou negócio. Ex: "Consultório de Psicologia", "Hamburgueria Artesanal", "Personal Trainer". A IA gerará textos persuasivos e específicos para o seu público.</p>
+        </div>
+      </div>
+
+      <!-- Passo 2: Customizando Sem Código -->
+      <div id="step2" class="section-content">
+        <span class="step-badge">Passo 2</span>
+        <h1>Customizando Detalhes Sem Programar</h1>
+        <p>Depois que a IA gerar seus arquivos <code>index.html</code> e <code>index.css</code>, você pode facilmente customizar textos e cores sem precisar dominar programação.</p>
+
+        <h2>Como alterar os textos</h2>
+        <p>Abra o arquivo <code>index.html</code> no bloco de notas ou em um editor simples de texto. Procure pelas palavras que deseja alterar e mude o texto que fica entre as tags HTML. Exemplo:</p>
+        
+        <div class="code-box">
+          <pre>De: &lt;h1&gt;Crie seu Site Expresso&lt;/h1&gt;
+Para: &lt;h1&gt;Adquira Minha Mentoria de Negócios&lt;/h1&gt;</pre>
+        </div>
+
+        <h2>Como alterar as cores principais</h2>
+        <p>No arquivo <code>index.css</code>, você encontrará a definição das variáveis de cor no topo do arquivo (geralmente no bloco <code>:root</code>). Você pode alterar os valores hexadecimais para usar as cores da sua marca:</p>
+
+        <div class="code-box">
+          <pre>:root {
+  --primary-color: #00F2FE; /* Altere este código hexadecimal pela sua cor principal */
+  --bg-dark: #070913;      /* Cor de fundo do site */
+}</pre>
+        </div>
+      </div>
+
+      <!-- Passo 3: Hospedagem Grátis -->
+      <div id="step3" class="section-content">
+        <span class="step-badge">Passo 3</span>
+        <h1>Hospedando Seu Site Gratuitamente</h1>
+        <p>Não há necessidade de pagar hospedagens mensais caras para sites institucionais simples. Usaremos o <strong>Netlify</strong>, uma das plataformas mais rápidas e seguras do mundo, que oferece um plano gratuito vitalício.</p>
+
+        <h2>Passo a Passo para Colocar no Ar:</h2>
+        <ol>
+          <li>Crie uma pasta no seu computador chamada <code>site-publicado</code>.</li>
+          <li>Coloque os arquivos <code>index.html</code> e <code>index.css</code> (e a pasta de imagens, se houver) dentro dessa pasta.</li>
+          <li>Acesse o site <a href="https://www.netlify.com" target="_blank" style="color: var(--primary);">Netlify.com</a> e faça um cadastro rápido gratuito.</li>
+          <li>Vá para a seção <strong>"Sites"</strong> e procure pela área de upload chamada <strong>"Drag and drop your site folder here"</strong>.</li>
+          <li>Arraste a sua pasta inteira para dentro dessa área.</li>
+        </ol>
+
+        <div class="alert-box success">
+          <h4>🚀 Pronto!</h4>
+          <p>O Netlify processará seus arquivos em menos de 10 segundos e gerará um link público gratuito (ex: <code>meu-site.netlify.app</code>) para você compartilhar com seus clientes.</p>
+        </div>
+      </div>
+
+      <!-- Passo 4: Conectando Domínio -->
+      <div id="step4" class="section-content">
+        <span class="step-badge">Passo 4</span>
+        <h1>Conectando Seu Domínio Personalizado</h1>
+        <p>Para ter uma presença profissional completa, você pode usar um domínio próprio (ex: <code>www.seunegocio.com.br</code>) no seu site hospedado no Netlify.</p>
+
+        <h2>Como configurar:</h2>
+        <ol>
+          <li>Compre seu domínio em portais como o <a href="https://registro.br" target="_blank" style="color: var(--primary);">Registro.br</a> (para domínios .br) ou Namecheap (para domínios .com).</li>
+          <li>No painel do Netlify, clique no seu site publicado, acesse <strong>Site Configuration</strong> &gt; <strong>Domain Management</strong>.</li>
+          <li>Clique em <strong>Add a domain</strong> e digite o domínio que você comprou.</li>
+          <li>O Netlify fornecerá 4 servidores DNS (ex: <code>dns1.p01.nsone.net</code>).</li>
+          <li>Acesse a sua conta onde comprou o domínio (ex: Registro.br), clique em "Alterar Servidores DNS" e cole os 4 endereços fornecidos pelo Netlify.</li>
+        </ol>
+        <p>A propagação pode levar de 2 a 24 horas. Após isso, seu site profissional estará no ar no seu próprio domínio com certificado SSL de segurança gratuito ativado automaticamente!</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Navigation routing
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section-content').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Deactivate all nav links
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Show target section
+      document.getElementById(sectionId).classList.add('active');
+
+      // Find link that matches selection
+      event.currentTarget.classList.add('active');
+    }
+
+    // Code copier
+    function copyCode(button) {
+      const codeText = document.getElementById('prompt-content').innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        const originalText = button.innerText;
+        button.innerText = 'Copiado!';
+        button.style.borderColor = 'var(--accent)';
+        setTimeout(() => {
+          button.innerText = originalText;
+          button.style.borderColor = 'var(--border-color)';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
