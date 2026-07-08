@@ -3,9 +3,9 @@
 
 :root {
   /* Colors */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8FAFC;
-  --bg-card: #FFFFFF;
+  --bg-primary: #F1F5F9; /* Slate 100 - fundo cinza ardósia */
+  --bg-secondary: #E2E8F0; /* Slate 200 - seções escuras */
+  --bg-card: #FFFFFF; /* Cards em branco puro */
   --primary: #4F46E5; /* Indigo 600 */
   --primary-hover: #4338CA; /* Indigo 700 */
   --primary-light: #EEF2F6;
