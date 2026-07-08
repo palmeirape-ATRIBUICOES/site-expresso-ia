@@ -3,23 +3,23 @@
 
 :root {
   /* Colors - Baseadas no banner oficial (Fundo escuro, detalhes em roxo/azul e botão em gradiente laranja) */
-  --bg-primary: #080612; /* Fundo obsidian roxo escuro */
-  --bg-secondary: #0D0A1F; /* Fundo secundário levemente mais claro */
-  --bg-card: rgba(18, 14, 38, 0.6); /* Cards em roxo escuro translúcido com glassmorphism */
+  --bg-primary: #1C1936; /* Fundo violeta-ardósia médio vibrante */
+  --bg-secondary: #252247; /* Fundo secundário levemente mais claro */
+  --bg-card: rgba(45, 41, 79, 0.7); /* Cards violetas com efeito translúcido glassmorphism */
   --primary: #FF7A00; /* Laranja principal para realces */
   --primary-hover: #FFA800;
   --primary-light: rgba(255, 122, 0, 0.15);
   --secondary: #8B5CF6; /* Violeta/Roxo elétrico */
   --accent: #FF5A00; /* Laranja escuro */
   --text-primary: #FFFFFF; /* Texto principal em branco puro */
-  --text-secondary: #94A3B8; /* Slate 400 */
-  --text-muted: #475569; /* Slate 600 */
-  --border-color: rgba(139, 92, 246, 0.15); /* Bordas roxas discretas */
-  --border-hover: rgba(139, 92, 246, 0.35);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -4px rgba(0, 0, 0, 0.7);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.8);
+  --text-secondary: #E2E8F0; /* Slate 200 - clareado para contraste no fundo médio */
+  --text-muted: #94A3B8; /* Slate 400 */
+  --border-color: rgba(139, 92, 246, 0.25); /* Bordas roxas mais visíveis */
+  --border-hover: rgba(139, 92, 246, 0.45);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
 
   /* Fonts */
   --font-heading: 'Outfit', sans-serif;
