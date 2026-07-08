@@ -363,6 +363,64 @@
       }
       return '';
     }
+
+    // Telemetry Tracking Script
+    (function() {
+      let sessionId = sessionStorage.getItem('site_expresso_session_id');
+      if (!sessionId) {
+        sessionId = 'session_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now();
+        sessionStorage.setItem('site_expresso_session_id', sessionId);
+      }
+
+      const dbUrl = `https://iabuilder-8a7e7-default-rtdb.firebaseio.com/site-expresso-ia/sessions/${sessionId}.json`;
+      let startTime = Date.now();
+      let duration = 0;
+      let selectedNiche = 'não informado';
+      let clickedConversion = false;
+
+      function sendTelemetry() {
+        const payload = {
+          startTime: startTime,
+          lastActive: Date.now(),
+          duration: duration,
+          niche: selectedNiche,
+          converted: clickedConversion
+        };
+        fetch(dbUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('Telemetry error:', err));
+      }
+
+      sendTelemetry();
+
+      setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          duration += 10;
+          sendTelemetry();
+        }
+      }, 10000);
+
+      const originalStartSimulation = window.startSimulation;
+      window.startSimulation = function() {
+        const nicheInput = document.getElementById('niche-input');
+        if (nicheInput) {
+          selectedNiche = nicheInput.value.trim() || 'Nicho Selecionado';
+          sendTelemetry();
+        }
+        if (originalStartSimulation) {
+          originalStartSimulation();
+        }
+      };
+
+      document.querySelectorAll('a[href*="kiwify.com.br"]').forEach(cta => {
+        cta.addEventListener('click', () => {
+          clickedConversion = true;
+          sendTelemetry();
+        });
+      });
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Analytics</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg-dark: #070913;
+      --bg-surface: #0E1326;
+      --bg-card: rgba(19, 26, 51, 0.6);
+      --primary: #00F2FE;
+      --secondary: #4FACFE;
+      --accent: #10B981;
+      --error: #EF4444;
+      --text-primary: #FFFFFF;
+      --text-secondary: #94A3B8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Login Box */
+    .login-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .login-box h2 {
+      font-family: var(--font-heading);
+      margin-bottom: 24px;
+      font-size: 1.8rem;
+    }
+
+    .input-field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 14px 20px;
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--bg-dark);
+      border: none;
+      padding: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+    }
+
+    /* Dashboard view (Hidden by default) */
+    .dashboard {
+      display: none;
+      width: 100%;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dashboard-header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+    }
+
+    .dashboard-header h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-logout {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      border-color: rgba(0, 242, 254, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .metric-title {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      line-height: 1.1;
+    }
+
+    .metric-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    /* Online indicator */
+    .online-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .online-dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+
+    /* Layout Columns */
+    .layout-cols {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+    }
+
+    .col-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .col-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+
+    /* Table styles */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Niche List */
+    .niche-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .niche-name {
+      font-weight: 600;
+    }
+
+    .niche-count {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .layout-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Wall -->
+  <div id="login-wall" class="login-box">
+    <h2>Painel Administrativo</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 0.95rem;">Digite a senha de administrador para acessar os dados analíticos.</p>
+    <input type="password" id="password-input" class="input-field" placeholder="Digite a senha..." onkeydown="if(event.key === 'Enter') attemptLogin()">
+    <p id="login-error" style="color: var(--error); margin-bottom: 16px; display: none; font-size: 0.9rem;">Senha inválida. Tente novamente.</p>
+    <button onclick="attemptLogin()" class="btn-login">Entrar no Dashboard</button>
+    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 24px;">*Dica: A senha padrão inicial é <strong>admin123</strong></p>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="container dashboard">
+    <div class="dashboard-header">
+      <h1>Dashboard <span>Analytics</span></h1>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button onclick="fetchAnalytics()" class="btn-logout" style="color: var(--primary); border-color: rgba(0, 242, 254, 0.2);">Atualizar</button>
+        <button onclick="logout()" class="btn-logout">Sair</button>
+      </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="metrics-grid">
+      <!-- Visitas -->
+      <div class="metric-card">
+        <div class="metric-title">Visitas Totais</div>
+        <div id="metric-visits" class="metric-value">-</div>
+        <div class="metric-desc">Sessões únicas criadas</div>
+      </div>
+
+      <!-- Online -->
+      <div class="metric-card">
+        <div class="metric-title">Visitantes Online</div>
+        <div class="metric-value">
+          <span class="online-indicator">
+            <span class="online-dot"></span>
+            <span id="metric-online">-</span>
+          </span>
+        </div>
+        <div class="metric-desc">Ativos nos últimos 30 segundos</div>
+      </div>
+
+      <!-- Tempo Medio -->
+      <div class="metric-card">
+        <div class="metric-title">Tempo Médio</div>
+        <div id="metric-time" class="metric-value">-</div>
+        <div class="metric-desc">Permanência média ativa</div>
+      </div>
+
+      <!-- Conversao -->
+      <div class="metric-card">
+        <div class="metric-title">Cliques de Compra</div>
+        <div id="metric-conversion" class="metric-value">-</div>
+        <div class="metric-desc">Taxa de cliques em CTA de Venda</div>
+      </div>
+    </div>
+
+    <!-- Details Columns -->
+    <div class="layout-cols">
+      <!-- Ultimos Visitantes -->
+      <div class="col-card">
+        <h2>Últimas Visitas</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data / Hora</th>
+                <th>Duração</th>
+                <th>Nicho Buscado</th>
+                <th>Ação/Venda</th>
+              </tr>
+            </thead>
+            <tbody id="visitors-table-body">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-secondary);">Carregando histórico...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Nichos mais buscados -->
+      <div class="col-card">
+        <h2>Ninhos do Simulador (IA)</h2>
+        <div id="niche-list">
+          <p style="color: var(--text-secondary); text-align: center; padding: 24px;">Carregando preferências...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const passHash = "admin123"; // Senha padrão inicial (pode ser customizada)
+
+    // Check login state
+    if (sessionStorage.getItem('admin_logged_in') === 'true') {
+      showDashboard();
+    }
+
+    function attemptLogin() {
+      const input = document.getElementById('password-input').value;
+      const errorMsg = document.getElementById('login-error');
+      
+      if (input === passHash) {
+        sessionStorage.setItem('admin_logged_in', 'true');
+        showDashboard();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('admin_logged_in');
+      location.reload();
+    }
+
+    function showDashboard() {
+      document.getElementById('login-wall').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.body.style.alignItems = 'flex-start';
+      
+      fetchAnalytics();
+      // Auto refresh stats every 15 seconds
+      setInterval(fetchAnalytics, 15000);
+    }
+
+    async function fetchAnalytics() {
+      const url = "https://iabuilder-8a7e7-default-rtdb.firebaseio.com/site-expresso-ia/sessions.json";
+      
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Erro ao buscar dados do Firebase");
+        
+        const data = await response.json() || {};
+        processData(data);
+      } catch (err) {
+        console.error("Erro na leitura de telemetria:", err);
+      }
+    }
+
+    function processData(sessions) {
+      const sessionList = Object.entries(sessions).map(([id, val]) => ({
+        id,
+        ...val
+      }));
+
+      // 1. Total Visits
+      const totalVisits = sessionList.length;
+      document.getElementById('metric-visits').innerText = totalVisits;
+
+      // 2. Online Now (heartbeat updated in last 30s)
+      const now = Date.now();
+      const onlineCount = sessionList.filter(s => (now - s.lastActive) < 30000).length;
+      document.getElementById('metric-online').innerText = onlineCount;
+
+      // 3. Average Time on Page
+      let totalDuration = 0;
+      sessionList.forEach(s => {
+        totalDuration += s.duration || 0;
+      });
+      const avgDuration = totalVisits > 0 ? Math.round(totalDuration / totalVisits) : 0;
+      document.getElementById('metric-time').innerText = formatDuration(avgDuration);
+
+      // 4. Click conversions
+      const conversionCount = sessionList.filter(s => s.converted === true).length;
+      const conversionRate = totalVisits > 0 ? ((conversionCount / totalVisits) * 100).toFixed(1) : 0;
+      document.getElementById('metric-conversion').innerText = `${conversionCount} (${conversionRate}%)`;
+
+      // 5. Build recent visits table (last 10 visits)
+      const sortedSessions = sessionList.sort((a, b) => b.startTime - a.startTime);
+      const tableBody = document.getElementById('visitors-table-body');
+      tableBody.innerHTML = '';
+
+      if (sortedSessions.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-secondary);">Nenhuma visita registrada ainda.</td></tr>`;
+      } else {
+        sortedSessions.slice(0, 15).forEach(s => {
+          const dateStr = new Date(s.startTime).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+          const durationStr = formatDuration(s.duration || 0);
+          const badgeClass = s.converted ? 'badge-success' : 'badge-secondary';
+          const badgeText = s.converted ? 'Clique Compra' : 'Visitou';
+          
+          tableBody.innerHTML += `
+            <tr>
+              <td>${dateStr}</td>
+              <td>${durationStr}</td>
+              <td style="font-weight: 500;">${escapeHTML(s.niche || 'não informado')}</td>
+              <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+            </tr>
+          `;
+        });
+      }
+
+      // 6. Build most searched niches ranking
+      const nicheCounts = {};
+      sessionList.forEach(s => {
+        if (s.niche && s.niche !== 'não informado') {
+          const cleanNiche = s.niche.toLowerCase().trim();
+          nicheCounts[cleanNiche] = (nicheCounts[cleanNiche] || 0) + 1;
+        }
+      });
+
+      const sortedNiches = Object.entries(nicheCounts).sort((a, b) => b[1] - a[1]);
+      const nicheList = document.getElementById('niche-list');
+      nicheList.innerHTML = '';
+
+      if (sortedNiches.length === 0) {
+        nicheList.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 24px;">Nenhum nicho pesquisado ainda.</p>`;
+      } else {
+        sortedNiches.slice(0, 8).forEach(([niche, count]) => {
+          nicheList.innerHTML += `
+            <div class="niche-item">
+              <span class="niche-name">${capitalize(niche)}</span>
+              <span class="niche-count">${count}x</span>
+            </div>
+          `;
+        });
+      }
+    }
+
+    function formatDuration(seconds) {
+      if (seconds < 60) return `${seconds}s`;
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins}m ${secs}s`;
+    }
+
+    function capitalize(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+  </script>
+</body>
+</html>
