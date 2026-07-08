@@ -2,24 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Colors */
-  --bg-primary: #F1F5F9; /* Slate 100 - fundo cinza ardósia */
-  --bg-secondary: #E2E8F0; /* Slate 200 - seções escuras */
-  --bg-card: #FFFFFF; /* Cards em branco puro */
-  --primary: #4F46E5; /* Indigo 600 */
-  --primary-hover: #4338CA; /* Indigo 700 */
-  --primary-light: #EEF2F6;
-  --secondary: #0EA5E9; /* Sky 500 */
-  --accent: #10B981; /* Emerald 500 */
-  --text-primary: #0F172A; /* Slate 900 */
-  --text-secondary: #475569; /* Slate 600 */
-  --text-muted: #94A3B8; /* Slate 400 */
-  --border-color: #E2E8F0; /* Slate 200 */
-  --border-hover: #CBD5E1; /* Slate 300 */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  /* Colors - Baseadas no banner oficial (Fundo escuro, detalhes em roxo/azul e botão em gradiente laranja) */
+  --bg-primary: #080612; /* Fundo obsidian roxo escuro */
+  --bg-secondary: #0D0A1F; /* Fundo secundário levemente mais claro */
+  --bg-card: rgba(18, 14, 38, 0.6); /* Cards em roxo escuro translúcido com glassmorphism */
+  --primary: #FF7A00; /* Laranja principal para realces */
+  --primary-hover: #FFA800;
+  --primary-light: rgba(255, 122, 0, 0.15);
+  --secondary: #8B5CF6; /* Violeta/Roxo elétrico */
+  --accent: #FF5A00; /* Laranja escuro */
+  --text-primary: #FFFFFF; /* Texto principal em branco puro */
+  --text-secondary: #94A3B8; /* Slate 400 */
+  --text-muted: #475569; /* Slate 600 */
+  --border-color: rgba(139, 92, 246, 0.15); /* Bordas roxas discretas */
+  --border-hover: rgba(139, 92, 246, 0.35);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -4px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.8);
 
   /* Fonts */
   --font-heading: 'Outfit', sans-serif;
@@ -74,17 +74,18 @@ p {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: var(--primary);
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #FFA000 0%, #FF5A00 100%);
+  color: #080612; /* Texto escuro para alto contraste */
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.05rem;
-  padding: 16px 32px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  padding: 18px 36px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(255, 90, 0, 0.3);
   text-decoration: none;
   width: 100%;
   max-width: 400px;
@@ -92,9 +93,9 @@ p {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2), 0 4px 6px -4px rgba(79, 70, 229, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 90, 0, 0.55);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -258,7 +259,7 @@ header .logo-container {
 }
 
 .gallery-card {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 20px;
   overflow: hidden;
@@ -266,6 +267,7 @@ header .logo-container {
   transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(10px);
 }
 
 .gallery-card:hover {
@@ -405,11 +407,12 @@ header .logo-container {
 .sim-container {
   max-width: 680px;
   margin: 0 auto;
-  background: var(--bg-primary);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 24px;
   padding: 32px;
   box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
 }
 
 .sim-input-group {
