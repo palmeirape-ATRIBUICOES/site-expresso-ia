@@ -393,6 +393,7 @@
               <tr>
                 <th>Data / Hora</th>
                 <th>Duração</th>
+                <th>Localização</th>
                 <th>Nicho Buscado</th>
                 <th>Ação/Venda</th>
               </tr>
@@ -499,18 +500,20 @@
       tableBody.innerHTML = '';
 
       if (sortedSessions.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-secondary);">Nenhuma visita registrada ainda.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-secondary);">Nenhuma visita registrada ainda.</td></tr>`;
       } else {
         sortedSessions.slice(0, 15).forEach(s => {
           const dateStr = new Date(s.startTime).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
           const durationStr = formatDuration(s.duration || 0);
           const badgeClass = s.converted ? 'badge-success' : 'badge-secondary';
           const badgeText = s.converted ? 'Clique Compra' : 'Visitou';
+          const locationStr = s.location || 'Buscando...';
           
           tableBody.innerHTML += `
             <tr>
               <td>${dateStr}</td>
               <td>${durationStr}</td>
+              <td style="color: var(--primary); font-weight: 500;">${escapeHTML(locationStr)}</td>
               <td style="font-weight: 500;">${escapeHTML(s.niche || 'não informado')}</td>
               <td><span class="badge ${badgeClass}">${badgeText}</span></td>
             </tr>

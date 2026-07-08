@@ -377,6 +377,23 @@
       let duration = 0;
       let selectedNiche = 'não informado';
       let clickedConversion = false;
+      let userLocation = 'Buscando...';
+
+      // Geolocation fetch
+      fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.city && data.region_code) {
+            userLocation = `${data.city}, ${data.region_code}`;
+          } else {
+            userLocation = 'Desconhecido';
+          }
+          sendTelemetry();
+        })
+        .catch(() => {
+          userLocation = 'Desconhecido';
+          sendTelemetry();
+        });
 
       function sendTelemetry() {
         const payload = {
@@ -384,7 +401,8 @@
           lastActive: Date.now(),
           duration: duration,
           niche: selectedNiche,
-          converted: clickedConversion
+          converted: clickedConversion,
+          location: userLocation
         };
         fetch(dbUrl, {
           method: 'PATCH',
