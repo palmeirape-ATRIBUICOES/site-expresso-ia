@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>IA BUILDER™ | Volume 1</title>
+    <!-- Google Fonts: Inter for branding/interface, Cormorant Garamond for editorial storytelling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="apresentacao.css">
+    
+    <!-- ==========================================================================
+       TRAFFIC & CONVERSION ANALYTICS (GA4, Meta Pixel, Microsoft Clarity)
+       Para ativar, basta substituir os IDs de exemplo 'SEU-ID-XXX' pelos seus IDs reais.
+       ========================================================================== -->
+    <script>
+        // Configuração de IDs de Rastreamento
+        window.ANALYTICS_CONFIG = {
+            googleAnalyticsId: 'G-SEU-ID-GA4',
+            metaPixelId: '1133332111662246',      // ID do Meta/Facebook Pixel oficial
+            clarityId: 'SEU-ID-CLARITY'
+        };
+    </script>
+
+    <!-- Google Analytics (GA4) -->
+    <script>
+        if (window.ANALYTICS_CONFIG.googleAnalyticsId && window.ANALYTICS_CONFIG.googleAnalyticsId !== 'G-SEU-ID-GA4') {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.ANALYTICS_CONFIG.googleAnalyticsId;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', window.ANALYTICS_CONFIG.googleAnalyticsId, {
+                send_page_view: false // Controlado manualmente via JS ao passar os slides
+            });
+            window.gtag = gtag;
+        }
+    </script>
+
+    <!-- Meta / Facebook Pixel -->
+    <script>
+        if (window.ANALYTICS_CONFIG.metaPixelId && window.ANALYTICS_CONFIG.metaPixelId !== 'SEU-ID-META-PIXEL') {
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', window.ANALYTICS_CONFIG.metaPixelId);
+            window.fbq = fbq;
+        }
+    </script>
+
+    <!-- Microsoft Clarity (Session Replay & Funnels) -->
+    <script>
+        if (window.ANALYTICS_CONFIG.clarityId && window.ANALYTICS_CONFIG.clarityId !== 'SEU-ID-CLARITY') {
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", window.ANALYTICS_CONFIG.clarityId);
+        }
+    </script>
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        
+        <!-- Background Audio Toggle & Visualizer -->
+        <div class="audio-controls">
+            <button id="sound-toggle" class="btn-icon" aria-label="Ligar/Desligar som de fundo">
+                <div class="sound-wave">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="btn-text">Ativar Som de Fundo</span>
+            </button>
+        </div>
+
+        <!-- Controls Overlay -->
+        <div class="top-bar">
+            <div class="brand-info">
+                <span class="brand-title">IA BUILDER™</span>
+                <span class="volume-title">Volume 1 : Capítulo 1</span>
+            </div>
+            
+            <!-- Instagram / Netflix style progress bar -->
+            <div class="progress-bar-container">
+                <!-- Will be dynamically populated with indicator bars in JS -->
+            </div>
+
+            <!-- Page counter badge -->
+            <div id="page-counter" class="page-counter">Capa</div>
+
+            <div class="options-menu">
+                <button id="autoplay-toggle" class="btn-text-only" title="Modo Auto-Play">Auto-Play: OFF</button>
+                <button id="fullscreen-toggle" class="btn-icon-small" title="Tela Cheia">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Book Slides Container -->
+        <div class="slides-wrapper">
+            
+            <!-- Intro / Cover Page -->
+            <section class="slide active" id="slide-intro" data-type="cover">
+                <div class="cover-content">
+                    <div class="cover-brand">IA BUILDER™</div>
+                    <div class="cover-volume">VOLUME 1</div>
+                    <h1 class="cover-title">WORKSHOP GRATUITO<br>IA BUILDER™</h1>
+                    <p class="cover-subtitle">Construa um projeto real com IA, mesmo sem saber programar</p>
+                    <p class="cover-offer">
+                        Uma aula prática ao vivo para ver uma ideia sair do zero e virar uma solução funcional, sem slides e sem segredos.
+                    </p>
+                    <div class="cover-action">
+                        <button id="btn-cover-lead" class="btn-primary btn-primary-filled" data-open-lead="cover">QUERO MINHA VAGA</button>
+                        <button id="btn-start" class="btn-secondary">VER A JORNADA</button>
+                        <p class="nav-hint">A jornada completa continua abaixo para quem quiser entender a oportunidade.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Página 01 -->
+            <section class="slide" id="slide-1" data-type="image-full" style="background-image: url('images/page1.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center">
+                    <p class="editorial-text light animate-text">
+                        O FUTURO<br>
+                        <span class="italic">nunca chega de uma vez.</span>
+                    </p>
+                    <p class="editorial-text sub-line light animate-text delay-1">Ele começa silenciosamente.</p>
+                    <p class="editorial-text sub-line light highlight animate-text delay-2">Enquanto quase ninguém está olhando.</p>
+                </div>
+            </section>
+
+            <!-- Página 02 -->
+            <section class="slide" id="slide-2" data-type="black-text-only">
+                <div class="slide-content centered">
+                    <p class="editorial-text medium light text-center line-height-large animate-text">
+                        Todas as gerações<br>
+                        <span class="italic font-large">receberam uma oportunidade.</span>
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-4 animate-text delay-1">
+                        Poucas perceberam isso enquanto ela ainda existia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 03 -->
+            <section class="slide" id="slide-3" data-type="image-full" style="background-image: url('images/page3.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-left pad-large">
+                    <p class="editorial-tag animate-text">Em 1995...</p>
+                    <p class="editorial-text small-med light text-left animate-text delay-1">
+                        Muita gente acreditava que a Internet era apenas uma curiosidade.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 04 -->
+            <section class="slide" id="slide-4" data-type="white-text-only">
+                <div class="slide-content centered">
+                    <p class="editorial-text giant dark text-center animate-text">
+                        Algumas pessoas aprenderam.
+                    </p>
+                    <p class="editorial-text giant-italic dark text-center mt-2 animate-text delay-1">
+                        A maioria esperou.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 05 -->
+            <section class="slide" id="slide-5" data-type="image-full" style="background-image: url('images/page5.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Enquanto milhões apenas navegavam...
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight animate-text delay-1">
+                        alguns estavam construindo empresas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 06 -->
+            <section class="slide" id="slide-6" data-type="black-text-only">
+                <div class="slide-content centered">
+                    <p class="editorial-text medium light text-center animate-text">
+                        Anos depois...
+                    </p>
+                    <p class="editorial-text medium light text-center italic mt-2 highlight animate-text delay-1">
+                        essas empresas passaram a valer bilhões.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 07 -->
+            <section class="slide" id="slide-7" data-type="image-full" style="background-image: url('images/page7.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-left pad-large">
+                    <p class="editorial-text small-med light text-left animate-text">
+                        Quando as redes sociais surgiram...
+                    </p>
+                    <p class="editorial-text small-med light text-left italic highlight mt-2 animate-text delay-1">
+                        quase ninguém imaginava que elas criariam milhares de novos negócios.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 08 -->
+            <section class="slide" id="slide-8" data-type="black-text-only">
+                <div class="slide-content centered">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Muitos disseram:
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic quote-style mt-3 animate-text delay-1">
+                        "Isso é só uma moda."
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-4 animate-text delay-2">
+                        Foi exatamente o que disseram sobre a Internet.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 09 -->
+            <section class="slide" id="slide-9" data-type="image-full" style="background-image: url('images/page9.jpg')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-left pad-large">
+                    <p class="editorial-text small-med light text-left animate-text">
+                        As maiores oportunidades<br>
+                        <span class="italic highlight font-med-large animate-text delay-1">quase nunca parecem grandes no começo.</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 10 -->
+            <section class="slide" id="slide-10" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text block-poetry dark text-center animate-text">
+                        Toda geração<br>
+                        tem uma tecnologia<br>
+                        <span class="bold animate-text delay-1">capaz de mudar</span><br>
+                        a forma como<br>
+                        <span class="italic animate-text delay-2">o mundo trabalha.</span>
+                    </p>
+                    <button class="btn-inline-cta dark animate-text delay-3" data-open-lead="slide-10">Reservar vaga gratuita</button>
+                </div>
+            </section>
+
+            <!-- Página 11 -->
+            <section class="slide" id="slide-11" data-type="image-full" style="background-image: url('images/page11.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small light text-center animate-text">
+                        A Inteligência Artificial já começou essa transformação.
+                    </p>
+                    <p class="editorial-text small light text-center mt-2 animate-text delay-1">
+                        A questão não é se ela vai mudar o mercado.
+                    </p>
+                    <p class="editorial-text small light text-center italic highlight mt-2 animate-text delay-2">
+                        É como cada pessoa escolherá participar dessa mudança.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 12 -->
+            <section class="slide" id="slide-12" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant light text-center animate-text">
+                        Durante décadas...
+                    </p>
+                    <p class="editorial-text medium light text-center mt-3 animate-text delay-1">
+                        transformar uma ideia em um software era um privilégio.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-4 animate-text delay-2">
+                        Privilégio de quem tinha dinheiro. Ou sabia programar.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 13 -->
+            <section class="slide" id="slide-13" data-type="image-full" style="background-image: url('images/page13.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-left pad-large">
+                    <p class="editorial-tag animate-text">A Barreira</p>
+                    <p class="editorial-text small-med light text-left animate-text delay-1">
+                        Durante muito tempo...
+                    </p>
+                    <p class="editorial-text small-med light text-left italic highlight mt-2 animate-text delay-2">
+                        criar tecnologia parecia algo reservado para grandes empresas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 14 -->
+            <section class="slide" id="slide-14" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-tag dark animate-text">O Processo Tradicional</p>
+                    <p class="editorial-text medium dark text-center line-height-large animate-text delay-1">
+                        Era necessário contratar:<br>
+                        <span class="bold">Programadores · Designers · UX · Banco de dados · Back-end · Front-end · Servidor · Infraestrutura · Testes · Manutenção</span>
+                    </p>
+                    <p class="editorial-text small dark text-center opacity-low mt-4 animate-text delay-2">
+                        Tudo isso para construir uma única ideia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 15 -->
+            <section class="slide" id="slide-15" data-type="image-full" style="background-image: url('images/page15.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-left pad-large">
+                    <p class="editorial-text small-med light text-left animate-text">
+                        Muitas ideias morriam antes mesmo de nascer.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 16 -->
+            <section class="slide" id="slide-16" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium light text-center animate-text">
+                        Não faltavam ideias.
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        Faltavam ferramentas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 17 -->
+            <section class="slide" id="slide-17" data-type="image-full" style="background-image: url('images/page17.jpg')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Milhões de ideias permaneceram apenas na imaginação.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 18 -->
+            <section class="slide" id="slide-18" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant dark text-center animate-text">
+                        Então...
+                    </p>
+                    <p class="editorial-text giant-italic dark text-center mt-2 animate-text delay-1">
+                        algo mudou.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 19 -->
+            <section class="slide" id="slide-19" data-type="image-full" style="background-image: url('images/page19.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        As grandes mudanças costumam chegar silenciosamente.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 20 -->
+            <section class="slide" id="slide-20" data-type="timeline-slide">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-tag animate-text">A Linha do Tempo</p>
+                    <div class="timeline-container animate-text delay-1">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="timeline-year">1995</div>
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">Internet</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2007</div>
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">Smartphones</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2009</div>
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">Nuvem</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2012</div>
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">Redes Sociais</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2022</div>
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">IA Generativa</div>
+                            </div>
+                            <div class="timeline-item highlight">
+                                <div class="timeline-year">Hoje</div>
+                                <div class="timeline-dot-user">
+                                    <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                </div>
+                                <div class="timeline-label">Você</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Página 21 -->
+            <section class="slide" id="slide-21" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Você não chegou atrasado.
+                    </p>
+                    <p class="editorial-text medium light text-center mt-3 animate-text delay-1">
+                        Você chegou quando as ferramentas começaram a ficar acessíveis.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 22 -->
+            <section class="slide" id="slide-22" data-type="image-full" style="background-image: url('images/page22.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        As maiores empresas começaram com uma ideia.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        As próximas podem começar na mesa da sua casa.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 23 -->
+            <section class="slide" id="slide-23" data-type="image-full" style="background-image: url('images/page23.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Existe uma oportunidade escondida dentro de praticamente toda empresa.
+                    </p>
+                    <p class="editorial-text small-med light text-center mt-2 animate-text delay-1">
+                        A maioria das pessoas vê apenas um negócio.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-2">
+                        Poucas enxergam um problema que pode ser resolvido com tecnologia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 24 -->
+            <section class="slide" id="slide-24" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium dark text-center animate-text">
+                        Toda empresa possui problemas.
+                    </p>
+                    <p class="editorial-text medium-large dark text-center italic mt-2 animate-text delay-1">
+                        Problemas criam oportunidades.
+                    </p>
+                    <p class="editorial-text small dark text-center opacity-low mt-4 animate-text delay-2">
+                        Quem aprende a resolver problemas cria valor. E quem cria valor dificilmente fica sem clientes.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 25 -->
+            <section class="slide" id="slide-25" data-type="image-full" style="background-image: url('images/page25.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Algumas empresas ainda trabalham exatamente assim.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 26 -->
+            <section class="slide" id="slide-26" data-type="image-full" style="background-image: url('images/page26.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Outras empresas trabalham assim.
+                    </p>
+                    <p class="editorial-text small-med light text-center mt-2 animate-text delay-1">
+                        A diferença não é o tamanho.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-2">
+                        É a tecnologia utilizada.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 27 -->
+            <section class="slide" id="slide-27" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Tecnologia não substitui empresas.
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        Ela multiplica empresas bem administradas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 28 -->
+            <section class="slide" id="slide-28" data-type="image-full" style="background-image: url('images/page28.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Os dois fazem pão.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        Mas apenas um deles construiu um sistema para ajudá-lo.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 29 -->
+            <section class="slide" id="slide-29" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-tag dark animate-text">Imagine conseguir construir soluções para:</p>
+                    <p class="editorial-text medium dark text-center line-height-large animate-text delay-1">
+                        <span class="bold">Hospitais · Clínicas · Padarias · Academias · Escolas · Restaurantes · Oficinas · Transportadoras · Pet Shops · Condomínios · Supermercados · Lojas Virtuais · Imobiliárias · Advogados · Contadores</span>
+                    </p>
+                    <p class="editorial-text small dark text-center opacity-low mt-4 animate-text delay-2">
+                        ... A lista praticamente nunca termina.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 30 -->
+            <section class="slide" id="slide-30" data-type="image-full" style="background-image: url('images/page30.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Cada problema resolvido pode se transformar em um produto.
+                    </p>
+                    <button class="btn-inline-cta light animate-text delay-1" data-open-lead="slide-30">Quero ver isso na prática</button>
+                </div>
+            </section>
+
+            <!-- Página 31 -->
+            <section class="slide" id="slide-31" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium light text-center animate-text">
+                        Durante muito tempo... construir um software era difícil.
+                    </p>
+                    <p class="editorial-text medium light text-center italic highlight mt-3 animate-text delay-1">
+                        Hoje... o mais difícil é escolher qual problema resolver primeiro.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 32 -->
+            <section class="slide" id="slide-32" data-type="image-full" style="background-image: url('images/page32.jpg')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Nunca existiram tantas possibilidades ao mesmo tempo.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 33 -->
+            <section class="slide" id="slide-33" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium dark text-center animate-text">
+                        A pergunta mudou.
+                    </p>
+                    <p class="editorial-text medium-large dark text-center mt-3 animate-text delay-1">
+                        Antes: <span class="italic">"Como vou construir isso?"</span>
+                    </p>
+                    <p class="editorial-text medium-large dark text-center italic highlight mt-2 animate-text delay-2">
+                        Hoje: "Qual problema vale a pena resolver?"
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 34 -->
+            <section class="slide" id="slide-34" data-type="image-full" style="background-image: url('images/page34.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        A Inteligência Artificial não cria empresas sozinha.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        Mas pode entregar as ferramentas que faltavam para tirar uma ideia do papel.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 35 -->
+            <section class="slide" id="slide-35" data-type="image-full" style="background-image: url('images/page35.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Imagine
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        se cada ideia pudesse se transformar em um produto.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 36 -->
+            <section class="slide" id="slide-36" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium-large dark text-center animate-text">
+                        A tecnologia deixou de ser apenas uma profissão.
+                    </p>
+                    <p class="editorial-text medium dark text-center mt-3 animate-text delay-1">
+                        Ela passou a ser uma ferramenta para resolver problemas.
+                    </p>
+                    <p class="editorial-text small dark text-center opacity-low mt-4 animate-text delay-2">
+                        Quanto maior o problema resolvido... maior tende a ser o valor percebido da solução.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 37 -->
+            <section class="slide" id="slide-37" data-type="image-full" style="background-image: url('images/page37.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        A Inteligência Artificial não pertence a uma profissão.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        Ela pode ser utilizada por praticamente qualquer área.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 38 -->
+            <section class="slide" id="slide-38" data-type="quadrant-slide">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-tag dark animate-text">A Transformação Digital</p>
+                    <div class="quadrant-container animate-text delay-1">
+                        <div class="quadrant-item">
+                            <div class="quadrant-num">01</div>
+                            <div class="quadrant-label">Ideia <span class="arrow-indicator">➔</span> Landing Page</div>
+                        </div>
+                        <div class="quadrant-item">
+                            <div class="quadrant-num">02</div>
+                            <div class="quadrant-label">Ideia <span class="arrow-indicator">➔</span> Sistema</div>
+                        </div>
+                        <div class="quadrant-item">
+                            <div class="quadrant-num">03</div>
+                            <div class="quadrant-label">Ideia <span class="arrow-indicator">➔</span> Aplicativo</div>
+                        </div>
+                        <div class="quadrant-item">
+                            <div class="quadrant-num">04</div>
+                            <div class="quadrant-label">Ideia <span class="arrow-indicator">➔</span> Empresa</div>
+                        </div>
+                    </div>
+                    <div class="quadrant-footer mt-4 animate-text delay-2">
+                        <p class="editorial-text small dark text-center">
+                            Toda grande empresa começou como uma ideia. A diferença está em quem decidiu construir.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Página 39 -->
+            <section class="slide" id="slide-39" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant light text-center animate-text">
+                        Você não precisa inventar<br>
+                        <span class="italic">o próximo Uber.</span>
+                    </p>
+                    <p class="editorial-text medium light text-center highlight mt-4 animate-text delay-1">
+                        Basta resolver um problema real de alguém.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 40 -->
+            <section class="slide" id="slide-40" data-type="image-full" style="background-image: url('images/page40.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Um sistema simples pode economizar horas de trabalho todos os dias.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        É exatamente por isso que empresas investem em tecnologia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 41 -->
+            <section class="slide" id="slide-41" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-tag dark animate-text">Imagine conseguir construir...</p>
+                    <p class="editorial-text medium dark text-center line-height-large animate-text delay-1">
+                        <span class="bold">Sistemas para clínicas · Apps para condomínios · Portais escolares · CRMs imobiliários · Plataformas de delivery · Painéis de logística · Central de atendimento · Agentes de IA</span>
+                    </p>
+                    <p class="editorial-text small dark text-center opacity-low mt-4 animate-text delay-2">
+                        A boa notícia é que todas essas possibilidades existem.<br>
+                        Nos próximos volumes você aprenderá como estruturar esse tipo de solução passo a passo.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 42 -->
+            <section class="slide" id="slide-42" data-type="image-full" style="background-image: url('images/page42.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small light text-center animate-text">
+                        Atrás de cada luz existe um negócio.
+                    </p>
+                    <p class="editorial-text small light text-center mt-2 animate-text delay-1">
+                        Atrás de cada negócio existem desafios.
+                    </p>
+                    <p class="editorial-text small light text-center italic highlight mt-2 animate-text delay-2">
+                        E muitos desses desafios podem ser resolvidos com software.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 43 -->
+            <section class="slide" id="slide-43" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Não existe falta de oportunidades.
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        Existe falta de pessoas preparadas para construir soluções.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 44 -->
+            <section class="slide" id="slide-44" data-type="image-full" style="background-image: url('images/page44.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        A distância entre uma ideia e um produto nunca foi tão pequena.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 45 -->
+            <section class="slide" id="slide-45" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant dark text-center animate-text">
+                        A pergunta não é mais:
+                    </p>
+                    <p class="editorial-text giant dark text-center italic mt-2 animate-text delay-1">
+                        "Será que consigo?"
+                    </p>
+                    <p class="editorial-text medium-large dark text-center highlight mt-4 animate-text delay-2">
+                        A pergunta agora é: "O que vou construir primeiro?"
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 46 -->
+            <section class="slide" id="slide-46" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text small light text-center opacity-low animate-text">
+                        Durante toda a história...
+                    </p>
+                    <p class="editorial-text small-med light text-center italic mt-2 animate-text delay-1">
+                        a humanidade construiu ferramentas.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-2 animate-text delay-2">
+                        Nada mais.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 47 -->
+            <section class="slide" id="slide-47" data-type="image-full" style="background-image: url('images/page47.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Toda grande revolução começou como uma ferramenta.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 48 -->
+            <section class="slide" id="slide-48" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant dark text-center animate-text">
+                        Ferramentas
+                    </p>
+                    <p class="editorial-text giant dark text-center italic mt-2 animate-text delay-1">
+                        não substituem
+                    </p>
+                    <p class="editorial-text giant dark text-center bold mt-2 animate-text delay-1">
+                        seres humanos.
+                    </p>
+                    <p class="editorial-text medium-large dark text-center mt-4 animate-text delay-2">
+                        Elas ampliam o que somos capazes de fazer.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 49 -->
+            <section class="slide" id="slide-49" data-type="image-full" style="background-image: url('images/page49.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        A diferença nunca foi apenas a habilidade.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        Também foi a ferramenta.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 50 -->
+            <section class="slide" id="slide-50" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium light text-center animate-text">
+                        Um pedreiro com uma escavadeira faz mais do que cem com uma pá.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-4 animate-text delay-1">
+                        A Inteligência Artificial representa esse tipo de salto para diversas atividades intelectuais.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 51 -->
+            <section class="slide" id="slide-51" data-type="image-full" style="background-image: url('images/page51.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Não é sobre trabalhar mais.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        É sobre produzir mais.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 52 -->
+            <section class="slide" id="slide-52" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium dark text-center animate-text">
+                        Durante muito tempo... conhecimento significava decorar respostas.
+                    </p>
+                    <p class="editorial-text medium-large dark text-center italic highlight mt-3 animate-text delay-1">
+                        Hoje... conhecimento também significa saber fazer as perguntas certas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 53 -->
+            <section class="slide" id="slide-53" data-type="image-full" style="background-image: url('images/page53.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Grandes soluções começam com uma boa pergunta.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 54 -->
+            <section class="slide" id="slide-54" data-type="image-full" style="background-image: url('images/page54.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Uma ideia continua sendo apenas uma ideia...
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        até que alguém decida construí-la.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 55 -->
+            <section class="slide" id="slide-55" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text giant-italic light text-center animate-text">
+                        A criatividade continua sendo humana.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-4 animate-text delay-1">
+                        A Inteligência Artificial acelera o processo. Mas ainda depende das pessoas para definir objetivos, fazer escolhas, validar resultados e transformar ideias em negócios.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 56 -->
+            <section class="slide" id="slide-56" data-type="image-full" style="background-image: url('images/page56.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Toda inovação começa quando alguém enxerga uma possibilidade que os outros ainda não perceberam.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 57 -->
+            <section class="slide" id="slide-57" data-type="white-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium-large dark text-center animate-text">
+                        Talvez... a próxima grande ideia não esteja em outro país.
+                    </p>
+                    <p class="editorial-text medium-large dark text-center italic highlight mt-3 animate-text delay-1">
+                        Talvez ela esteja no bairro onde você mora.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 58 -->
+            <section class="slide" id="slide-58" data-type="image-full" style="background-image: url('images/page58.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        À sua volta existem centenas de negócios.
+                    </p>
+                    <p class="editorial-text small light text-center mt-2 animate-text delay-1">
+                        Cada um deles enfrenta desafios diferentes.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-2">
+                        Cada desafio pode inspirar uma nova solução.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 59 -->
+            <section class="slide" id="slide-59" data-type="black-text-only">
+                <div class="slide-content centered pad-large">
+                    <p class="editorial-text medium light text-center animate-text">
+                        As melhores ideias raramente nascem em laboratórios.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-3 animate-text delay-1">
+                        Elas costumam nascer de alguém que decidiu observar com atenção.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 60 -->
+            <section class="slide" id="slide-60" data-type="image-full" style="background-image: url('images/page60.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text small-med light text-center animate-text">
+                        Bem-vindo ao começo da sua jornada.
+                    </p>
+                    <p class="editorial-text small light text-center mt-2 animate-text delay-1">
+                        No próximo capítulo, vamos responder à pergunta que impede milhares de pessoas de dar o primeiro passo:
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-2">
+                        "Mas eu não sei programar..."
+                    </p>
+                    <button class="btn-inline-cta light animate-text delay-3" data-open-lead="slide-60">Entrar na lista do workshop</button>
+                </div>
+            </section>
+
+            <!-- Página 61 -->
+            <section class="slide" id="slide-61" data-type="image-full" style="background-image: url('images/page61.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        "Tudo isso parece incrível...
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        mas eu não sei programar."
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 62 -->
+            <section class="slide" id="slide-62" data-type="image-full" style="background-image: url('images/page65.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Pela primeira vez... a tecnologia começou a falar a sua língua.
+                    </p>
+                    <p class="editorial-text small light text-center opacity-low mt-2 animate-text delay-1">
+                        Você não precisa aprender uma linguagem de programação. Você precisa aprender a explicar sua ideia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 63 -->
+            <section class="slide" id="slide-63" data-type="image-full" style="background-image: url('images/page75.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Pare de pensar como usuário.
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        Comece a pensar como construtor.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 64 (Mini Case 1 - Padaria) -->
+            <section class="slide" id="slide-64" data-type="image-full" style="background-image: url('images/page64_padaria.jpg')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Toda grande empresa começou como um problema pequeno.
+                    </p>
+                    <p class="editorial-text small-med light text-center italic highlight mt-2 animate-text delay-1">
+                        Alguém vai construir essa solução.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 65 -->
+            <section class="slide" id="slide-65" data-type="image-full" style="background-image: url('images/page78.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Toda reclamação...
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        pode esconder um negócio.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 66 (Mini Case 2 - Clínica) -->
+            <section class="slide" id="slide-66" data-type="image-full" style="background-image: url('images/page66_clinica.jpg')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center italic highlight animate-text">
+                        Existe uma oportunidade escondida aqui.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 67 -->
+            <section class="slide" id="slide-67" data-type="image-full" style="background-image: url('images/page83.png')">
+                <div class="slide-overlay"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Você não precisa criar algo revolucionário.
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        Você precisa resolver algo real.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 68 (Mini Case 3 - Oficina/Academia) -->
+            <section class="slide" id="slide-68" data-type="image-full" style="background-image: url('images/page68_oficina.jpg')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center italic highlight animate-text">
+                        Basta ligar os pontos.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Página 69 -->
+            <section class="slide" id="slide-69" data-type="image-full" style="background-image: url('images/page82.png')">
+                <div class="slide-overlay-heavy"></div>
+                <div class="slide-content bottom-center pad-large pb-5">
+                    <p class="editorial-text medium-large light text-center animate-text">
+                        Imagine...
+                    </p>
+                    <p class="editorial-text medium-large light text-center italic highlight mt-2 animate-text delay-1">
+                        se cada problema escondesse um negócio.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Tela Final da Experiência (Página 88) -->
+            <section class="slide" id="slide-final" data-type="final-screen">
+                <div class="final-container animate-text">
+                    <h1 class="final-title">Se você chegou até aqui...</h1>
+                    <div class="final-text">
+                        <p>Você concluiu a jornada do Volume 1.</p>
+                        <p>Isso significa que você faz parte da minoria que termina o que começa e busca transformar ideias em soluções reais.</p>
+                        <p>Nos próximos dias, vou realizar um <strong>Workshop Prático ao Vivo e Gratuito</strong>. Vou abrir meu computador e construir um projeto real do zero, sem slides e sem segredos.</p>
+                    </div>
+                    <button class="btn-cta-final" id="btn-open-modal" data-open-lead="final">Quero Participar do Workshop</button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Modal Popup para Inscrição (Celular/Desktop) -->
+        <div id="lead-modal" class="modal-backdrop">
+            <div class="modal-content">
+                <button class="modal-close-btn" id="btn-close-modal" aria-label="Fechar">&times;</button>
+                
+                <!-- Formulário de Inscrição -->
+                <div id="final-form-view" class="lead-form-container">
+                    <h2 class="form-title">Garanta sua vaga gratuitamente</h2>
+                    <p class="form-intro">Informe para onde devemos enviar o link da transmissão. Você pode completar os outros dados se quiser receber avisos pelo WhatsApp.</p>
+                    <form id="lead-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="form-label" for="lead-email">Email</label>
+                            <input type="email" id="lead-email" class="form-input" placeholder="Digite seu melhor email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="lead-name">Nome</label>
+                            <input type="text" id="lead-name" class="form-input" placeholder="Como podemos te chamar?" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="lead-phone">WhatsApp opcional</label>
+                            <input type="tel" id="lead-phone" class="form-input" placeholder="(00) 00000-0000">
+                        </div>
+                        <button type="submit" id="btn-submit-lead" class="btn-submit">
+                            Confirmar Minha Vaga
+                        </button>
+                        <p id="lead-form-error" class="form-error" role="alert"></p>
+                        <p class="form-footer-text">
+                            Nenhum spam. Seus dados serão usados apenas para enviar o link da transmissão do Workshop.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Success State View (Hidden by default) -->
+                <div id="final-success-view" class="success-state">
+                    <div class="success-icon">✓</div>
+                    <h2 class="success-title">Vaga reservada!</h2>
+                    <div class="success-message">
+                        <p>Assim que a data for definida, você receberá o link por email e WhatsApp.</p>
+                        <p>Até breve no Workshop ao Vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Popup para Pagamento Premium (Bloqueio Slide 21) -->
+        <div id="premium-payment-modal" class="modal-backdrop">
+            <div class="modal-content premium-modal-content" style="border-color: #d4af37;">
+                <button class="modal-close-btn" id="btn-close-premium-modal" aria-label="Fechar">&times;</button>
+                
+                <!-- Estado 1: Inserir WhatsApp -->
+                <div id="premium-whatsapp-view" class="lead-form-container">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">👑</div>
+                    <h2 class="form-title">Desbloqueie o Próximo Nível</h2>
+                    <p class="form-intro" style="color: #d4af37; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; text-align: center;">Treinamento Online Completo</p>
+                    <p class="form-intro">Você chegou ao final da demonstração gratuita. Para liberar os próximos cards e ter acesso ao treinamento completo, adquira sua vaga por apenas <strong>R$ 97,00</strong> no Pix.</p>
+                    
+                    <form id="premium-whatsapp-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="form-label" for="premium-whatsapp-input">Seu WhatsApp</label>
+                            <input type="tel" id="premium-whatsapp-input" class="form-input" placeholder="(00) 90000-0000" required>
+                        </div>
+                        <button type="submit" id="btn-generate-pix" class="btn-submit" style="background: linear-gradient(135deg, #d4af37, #aa7c11); color: #000; font-weight: 800; border: none; cursor: pointer;">
+                            IR PARA O PAGAMENTO (PIX/CARTÃO) 💳
+                        </button>
+                        <p id="premium-whatsapp-error" class="form-error" role="alert"></p>
+                    </form>
+                </div>
+
+                <!-- Estado 2: Pix QR Code e Copia/Cola -->
+                <div id="premium-pix-view" class="lead-form-container" style="display: none;">
+                    <h2 class="form-title">Aguardando Pagamento...</h2>
+                    <p class="form-intro">Escaneie o código QR abaixo ou copie a chave Pix para realizar o pagamento de <strong>R$ 97,00</strong>.</p>
+                    
+                    <div class="qr-code-wrapper" style="background: #fff; padding: 12px; border-radius: 18px; width: 220px; height: 220px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <img id="premium-pix-qr" src="" alt="Pix QR Code" style="width: 100%; display: none;">
+                        <div id="qr-loading-spinner" class="spinner" style="border: 4px solid rgba(0,0,0,0.1); border-left-color: #d4af37; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; position: absolute;"></div>
+                    </div>
+
+                    <button id="btn-copy-pix" class="btn-submit" style="background: rgba(255,255,255,0.05); border: 1px solid #d4af37; color: #d4af37; font-weight: 700; margin-bottom: 12px; cursor: pointer;">
+                        COPIAR CÓDIGO PIX 📋
+                    </button>
+                    <button id="btn-cancel-pix" class="btn-close" style="background: none; border: none; color: #6b7280; font-size: 0.85rem; cursor: pointer; text-decoration: underline;">
+                        Voltar
+                    </button>
+                    
+                    <div style="font-size: 0.75rem; color: #6b7280; margin-top: 15px; text-align: center;">
+                        A liberação é 100% automática após o pagamento.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Popup para Cadastro Pós-Pagamento -->
+        <div id="premium-register-modal" class="modal-backdrop">
+            <div class="modal-content premium-modal-content" style="border-color: #10b981;">
+                <div id="premium-register-view" class="lead-form-container">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">🎉</div>
+                    <h2 class="form-title" style="color: #10b981; text-align: center;">Pagamento Confirmado!</h2>
+                    <p class="form-intro">Parabéns! Seu acesso premium foi liberado automaticamente. Preencha seus dados abaixo para receber o link do treinamento online e ser contatado.</p>
+                    
+                    <form id="premium-register-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="form-label" for="premium-reg-name">Nome Completo</label>
+                            <input type="text" id="premium-reg-name" class="form-input" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="premium-reg-email">Email</label>
+                            <input type="email" id="premium-reg-email" class="form-input" placeholder="Seu melhor email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="premium-reg-phone">WhatsApp</label>
+                            <input type="tel" id="premium-reg-phone" class="form-input" placeholder="(00) 90000-0000" required readonly>
+                        </div>
+                        <button type="submit" id="btn-submit-premium-register" class="btn-submit" style="background: #10b981; color: #000; font-weight: 800; border: none; cursor: pointer;">
+                            LIBERAR PRÓXIMOS CARDS 🚀
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="nav-btn nav-prev" id="nav-prev-btn" aria-label="Página anterior">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="nav-btn nav-next" id="nav-next-btn" aria-label="Próxima página">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+
+        <!-- Touch hotspots for easy mobile tapping -->
+        <div class="touch-hotspot touch-left" id="hotspot-left"></div>
+        <div class="touch-hotspot touch-right" id="hotspot-right"></div>
+        
+    </div>
+
+    <script src="apresentacao.js"></script>
+</body>
+</html>
