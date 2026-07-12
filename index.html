@@ -566,13 +566,13 @@
 
     function getRandomCodeSnippet(index, niche) {
       if (index === 2) {
-        return `<pre style="color: #00FF41; margin-left: 12px; font-size: 0.8rem;">{ "node": "SDR Decision Tree", "conditions": { "niche": "${niche}" } }</pre>`;
+        return `<pre style="color: var(--primary); margin-left: 12px; font-size: 0.8rem;">{ "node": "SDR Decision Tree", "conditions": { "niche": "${niche}" } }</pre>`;
       }
       if (index === 3) {
         return `<pre style="color: #A78BFA; margin-left: 12px; font-size: 0.8rem;">redis.set("session_${niche.toLowerCase().replace(/\s+/g, '')}", context_memory)</pre>`;
       }
       if (index === 5) {
-        return `<pre style="color: #34D399; margin-left: 12px; font-size: 0.8rem;">evolution.send_text(target_phone, "Olá! Agendamos sua consulta para...")</pre>`;
+        return `<pre style="color: var(--primary); margin-left: 12px; font-size: 0.8rem;">evolution.send_text(target_phone, "Olá! Agendamos sua consulta para...")</pre>`;
       }
       return '';
     }

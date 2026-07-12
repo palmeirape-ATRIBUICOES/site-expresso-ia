@@ -3,24 +3,24 @@
 
 :root {
   /* Colors */
-  --bg-primary: #050505; /* Stark Black */
-  --bg-secondary: #0F0F0F; /* Dark Gray */
-  --bg-card: #0F0F0F;
-  --primary: #00FF41; /* Neon Green */
-  --primary-hover: #00D135;
-  --primary-light: rgba(0, 255, 65, 0.1);
+  --bg-primary: #0B0816; /* Stark Black */
+  --bg-secondary: #120F25; /* Dark Gray */
+  --bg-card: rgba(24, 20, 48, 0.6);
+  --primary: #FF7A00; /* Neon Green */
+  --primary-hover: #FFA000;
+  --primary-light: rgba(255, 122, 0, 0.1);
   --secondary: #7C3AED; /* Deep Purple */
   --accent: #25D366; /* WhatsApp Green */
   --text-primary: #FFFFFF;
   --text-secondary: #A0A0A9; /* Gray 400 */
   --text-muted: #71717A; /* Gray 500 */
   --border-color: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(0, 255, 65, 0.3);
+  --border-hover: rgba(255, 122, 0, 0.3);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.8);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.8), 0 2px 4px -2px rgba(0, 0, 0, 0.8);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.9), 0 4px 6px -4px rgba(0, 0, 0, 0.9);
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.95);
-  --glow-primary: 0 0 25px rgba(0, 255, 65, 0.25);
+  --glow-primary: 0 0 25px rgba(255, 122, 0, 0.25);
   --glow-secondary: 0 0 25px rgba(124, 58, 237, 0.25);
 
   /* Fonts */
@@ -76,17 +76,17 @@ p {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: var(--primary);
-  color: #000000;
+  background: linear-gradient(90deg, #FFA000 0%, #FF5A00 100%);
+  color: #0B0816;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.1rem;
   padding: 18px 36px;
   border: none;
-  border-radius: 9999px; /* Pill styled buttons like Thalena's site */
+  border-radius: 9999px;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
   text-decoration: none;
   width: 100%;
   max-width: 450px;
@@ -95,9 +95,9 @@ p {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(0, 255, 65, 0.55);
+  box-shadow: 0 0 35px rgba(255, 122, 0, 0.55);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -124,7 +124,7 @@ p {
 .btn-secondary:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background-color: rgba(0, 255, 65, 0.05);
+  background-color: rgba(255, 122, 0, 0.05);
 }
 
 /* Header */
@@ -158,9 +158,9 @@ header .logo-container {
 }
 
 .badge-status {
-  background-color: rgba(0, 255, 65, 0.1);
+  background-color: rgba(255, 122, 0, 0.1);
   color: var(--primary);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  border: 1px solid rgba(255, 122, 0, 0.2);
   padding: 8px 16px;
   border-radius: 9999px;
   font-size: 0.85rem;
@@ -392,8 +392,8 @@ header .logo-container {
 }
 
 .architect-card .icon-wrapper {
-  background: rgba(0, 255, 65, 0.1);
-  border: 1px solid rgba(0, 255, 65, 0.3);
+  background: rgba(255, 122, 0, 0.1);
+  border: 1px solid rgba(255, 122, 0, 0.3);
   color: var(--primary);
   width: 44px;
   height: 44px;
@@ -469,7 +469,7 @@ header .logo-container {
 
 /* 10x Templates Grid */
 .templates-section {
-  background: radial-gradient(circle at 50% 90%, rgba(0, 255, 65, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 90%, rgba(255, 122, 0, 0.05) 0%, transparent 60%);
 }
 
 .templates-grid {
@@ -492,9 +492,9 @@ header .logo-container {
 }
 
 .template-badge {
-  background-color: rgba(0, 255, 65, 0.1);
+  background-color: rgba(255, 122, 0, 0.1);
   color: var(--primary);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  border: 1px solid rgba(255, 122, 0, 0.2);
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -647,8 +647,8 @@ header .logo-container {
 }
 
 .pricing-box .price-card-guarantee {
-  background: rgba(0, 255, 65, 0.05);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  background: rgba(255, 122, 0, 0.05);
+  border: 1px solid rgba(255, 122, 0, 0.2);
   color: var(--primary);
   border-radius: 12px;
   padding: 14px;
@@ -664,9 +664,9 @@ header .logo-container {
 
 /* Guarantee Block */
 .guarantee-box {
-  background: rgba(0, 255, 65, 0.02);
+  background: rgba(255, 122, 0, 0.02);
   border: 2px border-style dashed var(--primary);
-  border: 2px dashed rgba(0, 255, 65, 0.4);
+  border: 2px dashed rgba(255, 122, 0, 0.4);
   border-radius: 28px;
   padding: 40px;
   max-width: 800px;
@@ -677,7 +677,7 @@ header .logo-container {
 .guarantee-icon {
   width: 72px;
   height: 72px;
-  background: rgba(0, 255, 65, 0.1);
+  background: rgba(255, 122, 0, 0.1);
   border: 2px solid var(--primary);
   border-radius: 50%;
   display: flex;
@@ -703,7 +703,7 @@ header .logo-container {
 /* Interactive Simulator */
 .simulator-section {
   padding: 100px 0;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 122, 0, 0.05) 0%, transparent 60%);
 }
 
 .sim-container {
